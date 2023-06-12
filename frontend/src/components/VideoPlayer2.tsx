@@ -40,7 +40,6 @@ const VideoPlayer2 = () => {
     );
     setImagesMatched([]);
     let labeledFaceDescriptors = await loadLocalImages();
-    // console.log(faceMatcher);
 
     const displaySize = {
       width: videoRef.current.width,
@@ -64,7 +63,6 @@ const VideoPlayer2 = () => {
       const results = resizedDetections.map((d) => {
         return faceMatcher.findBestMatch(d.descriptor);
       });
-      //   console.log(faceMatcher);
       labeledFaceDescriptors = labeledFaceDescriptors.filter((face) => {
         let found = false;
         results.forEach((res) => {
@@ -84,7 +82,7 @@ const VideoPlayer2 = () => {
         // console.log(`Matched with ${i} ${result}`);
         if (result.label !== "unknown") {
           const data = { result: result.label };
-          // console.log(data);
+
           setImagesMatched((prev) => [...prev, data]);
         }
 
@@ -105,6 +103,7 @@ const VideoPlayer2 = () => {
   };
 
   function loadLocalImages() {
+    // Name of images in the public/images folder
     const label = [1, 2, 3, 4, 5, 6, 7, 8];
 
     return Promise.all(
